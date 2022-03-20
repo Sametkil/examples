@@ -1,3 +1,5 @@
+package homework.four;
+
 import java.util.Scanner;
 
 public class HomeworkEbobEkok {

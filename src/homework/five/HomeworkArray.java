@@ -1,3 +1,5 @@
+package homework.five;
+
 import java.util.Scanner;
 
 public class HomeworkArray {
