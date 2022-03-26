@@ -1,0 +1,6 @@
+Girilen ilk sayi:10
+Girilen ikinci sayi:2
+Toplam:12
+Fark:8
+Carpim:20
+Bolum:5
