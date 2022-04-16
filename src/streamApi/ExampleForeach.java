@@ -13,6 +13,7 @@ public class ExampleForeach {
 		names.add("bbbb");
 		names.add("bbbb");
 		names.stream().forEach(System.out::println);
+		//names.stream().forEach((n) ->System.out.println(n));
 
 
 	}
