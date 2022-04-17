@@ -13,7 +13,7 @@ public class Main {
         myThread3.start();
 
         do{
-            System.out.println(".");
+            System.out.println("__Main Dongu__");
             try{
                 Thread.sleep(100);
             }catch (InterruptedException e){
