@@ -9,24 +9,19 @@ import java.util.logging.Logger;
 public class ProducerConsumer {
     Random random = new Random();
     Object lock =  new Object();
+    //Öğeleri işlemeden önce tutmak için tasarlanmış bir koleksiyon.
     Queue<Integer> queue = new LinkedList<Integer>();
     private int limit = 10;
 
-
-
     public void produce() {
-
         while (true) {
-
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(ProducerConsumer.class.getName()).log(Level.SEVERE, null, ex);
             }
             synchronized(lock) {
-
                 if (queue.size() == limit) {
-
                     try {
                         lock.wait();
                     } catch (InterruptedException ex) {
@@ -37,26 +32,18 @@ public class ProducerConsumer {
                 queue.offer(value);
                 System.out.println("Producer Uretiyor : " + value);
                 lock.notify();
-
             }
-
         }
-
-
     }
     public void consume(){
-
         while (true){
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(ProducerConsumer.class.getName()).log(Level.SEVERE, null, ex);
             }
-
             synchronized(lock) {
-
                 if (queue.size() == 0) {
-
                     try {
                         lock.wait();
                     } catch (InterruptedException ex) {
@@ -67,12 +54,7 @@ public class ProducerConsumer {
                 System.out.println("Consumer Tuketiyor : " + value);
                 System.out.println("Queue Size : " + queue.size());
                 lock.notify();
-
-
             }
-
         }
-
-
     }
 }

@@ -1,6 +1,6 @@
-package thread;
+package thread.produceConsume;
 
-import thread.example.ProducerConsumer;
+import thread.produceConsume.ProducerConsumer;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +29,8 @@ public class Main {
             producer.join();
             consumer.join();
         } catch (InterruptedException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Main.class.getName())
+                    .log(Level.SEVERE, null, ex);
         }
 
 
