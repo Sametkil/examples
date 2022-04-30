@@ -10,6 +10,6 @@ public class Main{
         System.out.println(((Animal)person).isAlive());
 
         Sum sum = new Sum();
-        System.out.println((double)sum.sum(5.5,5.5));
+        System.out.println((double)sum.sum("5.5","5.5"));
     }
 }

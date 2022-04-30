@@ -23,7 +23,8 @@ public class Main {
         String StringValue = stringGenericType.getObj();
         System.out.println(StringValue);
 
-        GenericType<Thread> threadGenericType = new GenericType<>(new Thread(new DemoRunnable()));
+        GenericType<Thread> threadGenericType =
+                new GenericType<>(new Thread(new DemoRunnable()));
         threadGenericType.showType();
         threadGenericType.getObj().start();
 

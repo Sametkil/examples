@@ -1,7 +1,6 @@
 package generics.restrictions;
 
 import java.util.AbstractList;
-import java.util.ArrayList;
 
 public class NumericOperator<T extends Number, R, E extends AbstractList<R>> {
     private T obj;

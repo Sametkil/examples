@@ -8,8 +8,10 @@ public class Main {
 
         ArrayList<Integer> integers = new ArrayList<>();
 
-        NumericOperator<Double,String, ArrayList<String>> doubleNumericOperator = new NumericOperator<>(5.5, new ArrayList<String>());
-        NumericOperator<Integer,String, ArrayList<String>> integerNumericOperator = new NumericOperator<>(10, new ArrayList<String>());
+        NumericOperator<Double,String, ArrayList<String>> doubleNumericOperator
+                = new NumericOperator<>(5.5, new ArrayList<String>());
+        NumericOperator<Integer,String, ArrayList<String>> integerNumericOperator
+                = new NumericOperator<>(10, new ArrayList<String>());
 
         // TODO liste içerisine farklı tipte veri ekleyebiliyorum. Neden?
         doubleNumericOperator.getList().add("Burak");
