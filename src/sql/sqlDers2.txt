@@ -1,0 +1,157 @@
+-- address tablosunda district,city.city,country.country
+
+select adr.district,c.city,ctry.country as name from address adr
+                inner join city c on adr.city_id=c.city_id
+                inner join country ctry on ctry.country_id=c.country_id
+                where ctry.country='Turkey' and c.city='Adana'
+                and adr.district='Adana';
+
+--- film.title, langulage.name,category.name
+
+select f.title,l.name as language_name,c.name as category_name from film f
+                inner join language l on l.language_id=f.language_id
+                inner join film_category fc on fc.film_id=f.film_id
+                inner join category c on c.category_id=fc.category_id;
+
+--left outer join
+
+select f.title,c.name from film f
+        left outer join film_category fc on f.film_id = fc.film_id
+        left outer join category c on fc.category_id = c.category_id;
+
+--film.title actor.name
+
+select f.title,a.first_name,a.last_name from film f
+            inner join film_actor fa on f.film_id = fa.film_id
+            inner join actor a on fa.actor_id = a.actor_id
+            where f.title='Aladdin Calendar';
+
+select f.title,a.first_name,a.last_name from film f
+                left join film_actor fa on f.film_id = fa.film_id
+                left join actor a on fa.actor_id = a.actor_id
+where f.title='Aladdin Calendar';
+
+select f.title,a.first_name,a.last_name from film f
+                right join film_actor fa on f.film_id = fa.film_id
+                right join actor a on fa.actor_id = a.actor_id
+where f.title='Aladdin Calendar';
+
+select f.title,a.first_name,a.last_name from film f
+                    full outer join film_actor fa on f.film_id = fa.film_id
+                    full outer join actor a on fa.actor_id = a.actor_id
+where f.title='Aladdin Calendar';
+
+-- union ve union all
+select * from film where film_id=10 or film_id=11
+union
+select * from film where film_id=11;
+
+
+select * from film where film_id=10 or film_id=11
+union all
+select * from film where film_id=11;
+
+select * from film where film_id=10 or film_id=11
+union
+select * from film where film_id=11
+union
+select * from film where film_id=12;
+
+
+-- city.city A ile başlayan ve country_id si 90 dan büyük olan sonucu union
+-- kullanarak bulunuz.
+
+select c.* from city c where c.city like 'A%'
+union
+select c2.* from city c2 where c2.country_id > 90;
+
+select c.* from city c where c.city like 'A%'
+union all
+select c2.* from city c2 where c2.country_id > 90 order by city_id;
+
+--intersect
+select * from film where film_id=10 or film_id=11
+intersect
+select * from film where film_id=11;
+
+-- customer activebool false olanların rental
+-- staff - address -> adres,city_name,country name
+
+select cus.first_name,cus.last_name,s.first_name,s.last_name
+     ,a.address,c.city,c2.country from customer cus
+    inner join rental r on cus.customer_id = r.customer_id
+    inner join staff s on r.staff_id = s.staff_id
+    inner join address a on s.address_id = a.address_id
+    inner join city c on a.city_id = c.city_id
+    inner join country c2 on c.country_id = c2.country_id
+where cus.activebool=false and cus.customer_id=170;
+
+
+--customer activebool false olanların kiraladıkları filmin title ve dili
+
+select f.title,l.name from customer cus
+    join rental r on cus.customer_id = r.customer_id
+    join inventory i on r.inventory_id = i.inventory_id
+    join film f on i.film_id = f.film_id
+    join language l on f.language_id = l.language_id
+where cus.activebool=false;
+
+-- bir müşteri toplam ne kadar ödeme yapmış
+select cus.customer_id,cus.first_name,sum(p.amount) from customer cus
+        inner join payment p on p.customer_id=cus.customer_id
+        group by cus.customer_id having sum(p.amount)>200;
+
+--hangi kategori da kaç film var ve 50 adetten büyük olanlar
+
+select c.name,count(*) from category c
+inner join film_category fc on c.category_id = fc.category_id
+inner join film f on fc.film_id = f.film_id
+group by c.category_id having count(*)>50;
+
+select * from film_category where category_id=1;
+
+--
+select c.name,count(*) from category c
+        inner join film_category fc on c.category_id = fc.category_id
+        inner join film f on fc.film_id = f.film_id
+        group by c.category_id having count(*)>50;
+
+select count(*) from film_category where category_id=2;
+--
+
+
+select * from customer where activebool=false;
+
+select * from rental where customer_id=170;
+
+select sum(amount) from payment where customer_id=169;
+
+
+select * from staff where staff_id=1;
+
+
+SELECT ROUND( 10.495 );
+SELECT FLOOR( 150.9999 );
+SELECT ceil( 10.001 );
+
+
+---- günümüz tarih saatini string çevirin. 'DD-MM-YYYY'
+
+select to_char(now(),'DD-MM-YYYY');
+
+------ '04-25-2020'
+
+select to_date('04.25.92','MM.DD.YY');
+
+--- case when
+
+select f.title,p.amount,
+       case
+        when p.amount<3 then 'Ucuz'
+        when p.amount<5 then 'Orta'
+        when p.amount<10 then 'Pahalı'
+        else 'cok pahalı' end as statü
+from payment p
+    inner join rental r on p.rental_id = r.rental_id
+    inner join inventory i on r.inventory_id = i.inventory_id
+    inner join film f on i.film_id = f.film_id

@@ -1,0 +1,157 @@
+-- address tablosunda district kolonundan içeriisnde be harfleri
+--geçen dataları gösterin
+
+select * from address where district like '%be%';
+
+-- address tablosunda address2 kolonu null olan datalar
+
+select * from address where address2 is null;
+
+-- film tablosunda release_year 2006 olan filmlerden
+-- rental_rate 3 ve 3 den büyük olan
+--length 90dan büyük olan datalar . length e göre sıralayın.
+
+select * from film where release_year=2006
+                     and rental_rate>=3
+                     and length>90 order by length desc;
+
+-- city tablosunda city kolonu Adana, İstanbul, Ankara, Denizli
+-- bu dataların
+
+select * from city where city.city in ('Ankara','İstanbul'
+,'Denizli','Adana');
+
+
+-- language tablosundaki id leri 3-5 dahil arasındaki datalar
+
+select * from language where language_id between 3 and 5;
+
+-- kendi tablomu oluşturdum
+
+create table burak_duman(id integer, name varchar(50)
+    ,surname varchar(50));
+
+
+-- tablomuza 4 tane data insert edelim.
+
+insert into burak_duman (id, name, surname) VALUES (1,'b','d');
+insert into burak_duman (id, name, surname) VALUES (2,'a','t');
+insert into burak_duman (id, name, surname) VALUES (3,'c','y');
+insert into burak_duman (id, name, surname) VALUES (4,'e','b');
+
+--veya
+
+insert into burak_duman (id, name, surname) VALUES (1,'b','d')
+, (2,'a','t'),(3,'c','y'),(4,'e','b');
+
+-- silme işlemi
+delete from burak_duman where id=4;
+
+--truncate
+truncate burak_duman;
+
+--güncelleme işlemi -idsi 4 olanları 5 e güncelleme
+update burak_duman set id=5 where id=4;
+
+-- alter table
+alter table  burak_duman add column name_surname varchar(100);
+alter table  burak_duman drop column name_surname;
+
+--
+create table burak_duman_2 (id integer
+                           ,name varchar(50)
+                           ,surname varchar(50));
+
+insert into burak_duman_2
+    select * from burak_duman;
+
+--drop table .
+
+drop table burak_duman;
+drop table burak_duman_2;
+
+-- as keyword
+
+select city_id, city as name,country_id from city;
+
+-- table
+
+select * from city a where a.city_id =100;
+
+-- table with column alias
+select a.city_id, a.city as name, a.country_id from city a
+
+-- district
+
+select distinct a.district from address a;
+
+-- limit and offset
+
+select * from city LIMIT 3 OFFSET 2;
+
+-- kümeleme fonksiyonları
+
+select count(*) from address;
+
+select count(address2) from address;
+
+
+select avg(rental_rate) from film;
+
+select max(rental_rate) from film;
+
+select min(rental_rate) from film;
+
+select max(description) from film;
+
+select sum(rental_rate) from film;
+
+-- payment tablosunda kaç data var , max-min-avg-sum amount
+-- getiren sorgu
+
+select count(p.*),min(p.amount),max(p.amount)
+     ,avg(p.amount),sum(p.amount) from payment p;
+
+-- group by
+select rating from film where release_year=2008;
+
+select rating,count(*) as rating_count,max(release_year)
+from film group by rating;
+
+-- city tablosunu ülkeye gruplayın sonra gruptaki eleman sayısı,
+-- ve elemanlar içerisindeki max name i buldurun.
+select country_id,count(*),max(city),min(city)
+from city group by country_id;
+
+--- where + group by
+
+select country_id,count(*),max(city),min(city)
+from city where country_id=97 or country_id=91
+group by country_id
+order by count(*) desc;
+
+-- having
+
+select country_id,count(*),max(city),min(city)
+from city group by country_id having count(*)>10;
+
+--inner join
+
+select ci.city,c.country from city ci inner join country c
+    on ci.country_id = c.country_id
+    where c.country='Turkey';
+
+-- film tablosunda film.title, language.name
+
+select f.title,l.name from film f
+    inner join language l
+    on f.language_id = l.language_id;
+
+-- address tablosunda district,city.city,country.country
+
+select a.address_id,a.district, c.city, c2.country from address a
+    inner join city c on a.city_id = c.city_id
+    inner join country c2 on c.country_id = c2.country_id
+    where c2.country = 'Turkey';
+
+select * from address where address_id=332;
