@@ -1,0 +1,62 @@
+select * from film_category f where f.category_id in ( -- (1,8)
+    select c.category_id from category c
+    where c.name in ('Family','Action'));
+
+select * from (select f.rental_rate,f.title,(select l.name from language l
+where l.language_id=f.language_id) from film f
+where f.rental_rate>(select avg(rental_rate) from film)) as abc;
+
+select avg(rental_rate) from film;
+
+
+-- payment taki amount ortalamasının üzerindeki harcamayı yapan müşterinin
+-- adı soyadı ve ne kadar harcadığı
+-- sadece subquery
+
+select p.amount,
+       (select c.first_name from customer c where c.customer_id=p.customer_id)
+        as FirstName,
+       (select c.last_name from customer c where c.customer_id=p.customer_id)
+        as LastName
+       from payment p
+where p.amount>(select avg(p2.amount) from payment p2);
+
+------
+
+select p.amount,c.first_name,c.last_name from payment p
+    inner join customer c
+    on p.customer_id = c.customer_id where p.amount>
+    (select avg(p2.amount) from payment p2);
+
+--
+
+select avg(p2.amount) from payment p2;
+
+select c.category_id from category c where c.name in ('Family','Action');
+
+
+
+
+SELECT * FROM film WHERE film_id = ALL (ARRAY[1, 2]);
+
+SELECT * FROM film WHERE film_id = ANY (ARRAY[1, 2]);
+
+
+select * from film where film_id < ALL (
+    select f.film_id from film_category f where f.category_id in (
+    select c.category_id from category c
+    where c.name in ('Family','Action')));
+
+select * from film where film_id < ANY (
+    select f.film_id from film_category f where f.category_id in (
+        select c.category_id from category c
+        where c.name in ('Family','Action')));
+
+select * from film where film_id <991;
+-- 5 1-2-3-4
+-- 19 1-2-3-4-5....18
+-- 21 1-2-3-5-......20
+
+select f.film_id from film_category f where f.category_id in (
+    select c.category_id from category c
+    where c.name in ('Family','Action')) order by f.film_id

@@ -9,16 +9,16 @@ public class JdbcExampleOne {
                         ("jdbc:postgresql://92.205.21.233:5432/dvdrental"
                                 , "bilge_adam",
                                 "1bilge_adam23");
-        Statement statement = connection.createStatement();
+        //Statement statement = connection.createStatement();
         PreparedStatement preparedStatement
                 = connection.prepareStatement
-                ("select address_id,city_id,district" +
+                ("select address_id,address2,district" +
                         ",address from address");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            System.out.println(resultSet.getInt(1)
-                    + " " + resultSet.getInt(2)
-                    + " " + resultSet.getString(3) +
+            System.out.println(resultSet.getInt("address_id")
+                    + ", " + resultSet.getString(2)
+                    + ", " + resultSet.getString(3) +
                     ", " + resultSet.getString(4));
         }
         connection.close();

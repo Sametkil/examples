@@ -1,0 +1,73 @@
+<!-- kullanıcı dan iki sayı alın
+    2 input 1 topla diye buton
+iki sayının toplamını Toplam = XXX diye yazdırmanızı istiyorum.
+parseInt(amount, 10);
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function sumCalc(number1,number2){
+           return parseInt(number1)+parseInt(number2);
+        }
+
+        function divCalc(number1,number2){
+           return parseInt(number1)/parseInt(number2);
+        }
+
+        function diffCalc(number1,number2){
+           return parseInt(number1)-parseInt(number2);
+        }
+
+        function multCalc(number1,number2){
+           return parseInt(number1)*parseInt(number2);
+        }
+
+        function sumFunc(){
+           var number1 = document.getElementById("number1").value;
+           var number2 = document.getElementById("number2").value;
+           document.getElementById("result").innerHTML=
+           'Toplam = ' + sumCalc(number1,number2);
+        }
+
+        function divFunc(){
+           var number1 = document.getElementById("number1").value;
+           var number2 = document.getElementById("number2").value;
+           document.getElementById("result").innerHTML=
+           'Bölme = ' + divCalc(number1,number2);
+        }
+        function diffFunc(){
+           var number1 = document.getElementById("number1").value;
+           var number2 = document.getElementById("number2").value;
+           document.getElementById("result").innerHTML=
+           'Çıkarma = ' + diffCalc(number1,number2);
+        }
+        function  multFunc(){
+           var number1 = document.getElementById("number1").value;
+           var number2 = document.getElementById("number2").value;
+           document.getElementById("result").innerHTML=
+           'Çarpma = ' + multCalc(number1,number2);
+        }
+
+    </script>
+</head>
+<body>
+
+<h2>My First Calculator</h2>
+<input type="text" id="number1"></input>
+<br /><br/>
+<input type="text" id="number2"></input>
+<br/><br/>
+<button type="button"
+onclick="sumFunc()">Topla</button>
+<button type="button"
+onclick="diffFunc()">Çıkarma</button>
+<button type="button"
+onclick="divFunc()">Bölme</button>
+<button type="button"
+onclick="multFunc()">Çarpma</button>
+<br/><br/>
+<p id="result"></p>
+</body>
+</html> 
