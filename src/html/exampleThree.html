@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"
+        type="text/javascript"></script>
+    <script type="text/javascript">
+        var random = Math.floor(Math.random() * 10) + 1;
+        function randomGame() {
+            var number = parseInt(document.getElementById("inputNumberId").value);
+            if (random == number) {
+                document.getElementById("resultId").innerHTML = "Doğru Tahmin!!! Yeniden Sayı Üretildi.";
+                random = Math.floor(Math.random() * 10) + 1;
+            } else {
+                document.getElementById("resultId").innerHTML = "Yanlış Tahmin!!! Sayi : " + random;
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-group">
+            <label for="inputNumberId">Sayı Giriniz:</label>
+            <br />
+            <input id="inputNumberId" type="text" class="form-control"></input>
+        </div>
+        <br />
+        <button onclick="randomGame()"  class="btn btn-primary">Tabloyu Çıkar</button>
+        <br />
+        <label id="resultId">Sonuç</label>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!-- 
+2 tane inputText ve inputText önüne 2 label istiyorum.
+Label ,butonlar inputText bootstrap kullanılarak oluşturulmalı.
+3 buton istiyorum. 1. buton 2 string'i birleştirsin.
+kalan iki butonda hide ve show yapsın tüm label ve inputları
+
+name : inputText
+surname: inputst
+
+buton concat 
+
+label da birleştirme işlemi görünmesi lazım.
+
+2 buton input text ve labelları hide ve show yapan.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"
+        type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            $("#hideButtonId").click(function () {
+                $("label").hide(5000);
+                $("input").hide(5000);
+            });
+            $("#showButtonId").click(function () {
+                $("label").show(5000);
+                $("input").show(5000);
+            });
+            $("#concatButtonId").click(function () {
+                var inputText1 = $("#exampleInputName").val();
+                var inputText2 = $("#exampleInputSurname").val();
+                $("#resultLabelId").html(inputText1 + inputText2);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-group">
+            <label for="exampleInputName">Name</label>
+            <input type="text" class="form-control" id="exampleInputName" placeholder="Enter name">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputSurname">Surname</label>
+            <input type="text" class="form-control" id="exampleInputSurname" placeholder="Enter Surname">
+        </div>
+        <br />
+        <button id="concatButtonId" class="btn btn-primary">ConCat</button>
+        <button id="hideButtonId" class="btn btn-danger" >Hide</button>
+        <button id="showButtonId" class="btn btn-primary" >Show</button>
+        <br />
+        <label id="resultLabelId"></label>
+    </div>
+</body>
+</html>

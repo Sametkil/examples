@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"
+        type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            $("#buttonId").click(function () {
+                var name = $("#nameId").val();
+                var surname = $("#surnameId").val();
+                
+                var row = "<tr><td>"+name+"</td><td>"+surname+"</td></tr>";
+                $("#tbodyId").append(row);
+
+                $("#nameId").val("");
+                $("#surnameId").val("");
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-group">
+            <label for="nameId">İsim Giriniz:</label>
+            <br />
+            <input id="nameId" type="text" class="form-control"></input>
+        </div>
+        <br />
+        <div class="form-group">
+            <label for="surnameId">Soyisim Giriniz:</label>
+            <br />
+            <input id="surnameId" type="text" class="form-control"></input>
+        </div>
+        <br />
+        <button id="buttonId" class="btn btn-primary">Ekle</button>
+        <table class="table table-dark table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Surname</th>
+                </tr>
+            </thead>
+            <tbody id="tbodyId">
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

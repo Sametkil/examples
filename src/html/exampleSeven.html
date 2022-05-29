@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+    <style>
+        .custom-background-color-button1 {
+            background-color: red;
+        }
+
+        .custom-background-color-button2 {
+            background-color: blue;
+        }
+    </style>
+     <script>
+          $(document).ready(function () {
+            $("#buttonId1").click(function () {
+                $("p").removeClass("custom-background-color-button2"); 
+                $("p").addClass("custom-background-color-button1");
+            });
+            $("#buttonId2").click(function () {
+                $("p").removeClass("custom-background-color-button1");
+                $("p").addClass("custom-background-color-button2");  
+            });
+          });
+     </script>
+</head>
+
+<body>
+    <p>Test paragraf test atasdas tşasldşi 123123123</p>
+    <button id="buttonId1">Red Button</button>
+    <button id="buttonId2">Blue Button</button>
+</body>
+
+</html>
